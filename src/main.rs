@@ -21,7 +21,7 @@ fn clear_bss() {
 }
 
 #[no_mangle]
-extern "C" fn rust_main() {
+pub fn rust_main() -> ! {
     extern "C" {
         fn stext();
         fn etext();
