@@ -4,11 +4,15 @@
 
 use log::*;
 
+use crate::batch::print_app_info;
+
 #[macro_use]
 mod console;
+mod batch;
 mod lang_item;
 mod logging;
 mod sbi;
+mod sync;
 
 core::arch::global_asm!(include_str!("entry.asm"));
 core::arch::global_asm!(include_str!("link_app.S"));
@@ -46,6 +50,7 @@ pub fn rust_main() -> ! {
         boot_stack as usize, boot_stack_top as usize
     );
     error!(".bss [{:#x}, {:#x})", sbss as usize, ebss as usize);
+    print_app_info();
     panic!("Shutdown machine!");
     // sbi::shutdown();
 }
