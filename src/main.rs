@@ -11,6 +11,7 @@ mod logging;
 mod sbi;
 
 core::arch::global_asm!(include_str!("entry.asm"));
+core::arch::global_asm!(include_str!("link_app.S"));
 
 fn clear_bss() {
     extern "C" {
@@ -46,5 +47,5 @@ pub fn rust_main() -> ! {
     );
     error!(".bss [{:#x}, {:#x})", sbss as usize, ebss as usize);
     panic!("Shutdown machine!");
-    sbi::shutdown();
+    // sbi::shutdown();
 }
